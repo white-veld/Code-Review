@@ -10,7 +10,7 @@ from collections import OrderedDict
 class Parser:
     def __init__(self):
         self.list_lessons = OrderedDict()
-        self.bot = telebot.TeleBot('6980241396:AAEorBOe_DnoX6XiMt3AasWQwgpXhcittA8')
+        self.bot = telebot.TeleBot('Token')
         self.group = None
         self.groups = []
 
