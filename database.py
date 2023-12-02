@@ -32,15 +32,13 @@ class DataAccessObject:
     def show_base(self, group):
         self.tab.execute('SELECT * FROM schedule')
         result = self.tab.fetchall()
-        print(result)
         items = []
         for i in range(len(result)):
             if result[i][0] == group:
                 items.append(result[i])
-                print(result[i])
         table = PrettyTable()
         table.field_names = result[0][2:]
-        for i in range(1, len(items)):
+        for i in range(len(items)):
             if items[i][1] != items[i - 1][1]:
                 table.add_row([items[i][1], '', '', ''])
             table.add_row(items[i][2:])
