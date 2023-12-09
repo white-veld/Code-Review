@@ -5,7 +5,7 @@ from backend import Parser
 
 class TelegramBot:
     def __init__(self):
-        self.bot = telebot.TeleBot('6980241396:AAEorBOe_DnoX6XiMt3AasWQwgpXhcittA8')
+        self.bot = telebot.TeleBot('Token')
         self.group = None
         self.pars = Parser()
         Parser.get_groups(self.pars)
