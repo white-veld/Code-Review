@@ -1,4 +1,4 @@
-import sqlite3
+import psycopg2
 from prettytable import PrettyTable
 
 
@@ -11,7 +11,13 @@ class DataAccessObject:
         return cls.__instance
 
     def __init__(self):
-        self.connect = sqlite3.connect('mydata.db')
+        self.connect = psycopg2.connect(
+            host="db",
+            user="root",
+            password="root",
+            port="5432",
+            dbname="test_db",
+        )
         self.tab = self.connect.cursor()
         self.tab.execute('''CREATE TABLE IF NOT EXISTS schedule (
                           name_group TEXT,
@@ -24,9 +30,9 @@ class DataAccessObject:
         self.connect.commit()
 
     def create(self, name_group, day, time, discipline, auditorium, teacher):
-        self.tab.execute(
-            'INSERT INTO schedule (name_group, day, time, discipline, auditorium, teacher) VALUES(?, ?, ?, ?, ?, ?)',
-            (name_group, day, time, discipline, auditorium, teacher))
+        sql = 'INSERT INTO schedule (name_group, day, time, discipline, auditorium, teacher) VALUES(%s, %s, %s, %s, %s, %s)'
+        data = (name_group, day, time, discipline, auditorium, teacher)
+        self.tab.execute(sql, data)
         self.connect.commit()
 
     def show_base(self, group):
