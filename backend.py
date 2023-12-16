@@ -39,7 +39,7 @@ class Parser:
                     new_url += self.dictionary[i]
             new_req = requests.get(new_url, headers=self.headers)
             new_soup = BS(new_req.content, 'lxml')
-            lessons_data = new_soup.find(id="nav-rasp-1").find_all("tr")
+            lessons_data = new_soup.find(id="nav-ses-1").find_all("tr")
             check = True
             for group in self.groups:
                 if group == group:
@@ -78,6 +78,8 @@ class Parser:
                                list_lessons[i][2],
                                list_lessons[i][3])
                     continue
+                if list_lessons[i] is None:
+                    break
                 for j in range(len(list_lessons[i])):
                     dao.create(group,
                                i,
