@@ -3,3 +3,4 @@ pyTelegramBotAPI
 bs4
 prettytable
 lxml
+psycopg2
